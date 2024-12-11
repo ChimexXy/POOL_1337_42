@@ -1,44 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rush03.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbarhoun <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/31 14:06:27 by mbarhoun          #+#    #+#             */
+/*   Updated: 2024/09/01 17:41:24 by mbarhoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void    ft_putchar(char c);
+void	ft_putchar(char c);
 
-void    ft_condition(int line, int max_line, int colone, int max_colone)
+void	ft_condition(int line, int x, int colone, int y)
 {
-    if ((line == 1 || line == max_line) && (colone == 1))
-        ft_putchar('A');
-    else if ((line == 1 || line == max_line) 
-        && (colone == max_colone))
-        ft_putchar('C');
-    else if ((line == 1 || line == max_line) 
-        && (colone > 1 && colone < max_colone))
-        ft_putchar('B');
-    else if ((line > 1 && line < max_line) 
-        && (colone == 1 || colone == max_colone))
-        ft_putchar('B');
-    else
-        ft_putchar(' ');
+	if ((line == 1 || line == x) && (colone == 1))
+		ft_putchar('A');
+	else if ((line == 1 || line == x) 
+		&& (colone == y))
+		ft_putchar('C');
+	else if ((line == 1 || line == x) 
+		&& (colone > 1 && colone < y))
+		ft_putchar('B');
+	else if ((line > 1 && line < x) 
+		&& (colone == 1 || colone == y))
+		ft_putchar('B');
+	else
+		ft_putchar(' ');
 }
 
-void    rush(int x, int y)
+void	rush(int y, int x)
 {
-    int    length;
-    int    width;
+	int	line;
+	int	colone;
 
-    if (x > 0 && y > 0)
-    {
-        length = 1;
-        while (length <= y)
-        {
-            width = 1;
-            while (width <= x)
-            {
-                ft_condition(length, y, width, x);
-                width++;
-            }
-            ft_putchar('\n');
-            length++;
-        }
-    }
-    else
-        write(1, "inputs = < 0\n", 13);
+	if (y > 0 && x > 0)
+	{
+		line = 1;
+		while (line <= x)
+		{
+			colone = 1;
+			while (colone <= y)
+			{
+				ft_condition(line, x, colone, y);
+				colone++;
+			}
+			ft_putchar('\n');
+			line++;
+		}
+	}
+	else
+		write(1, "Error\n", 6);
 }
